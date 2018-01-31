@@ -2,7 +2,7 @@
 
 "use strict"
 
-var socket = io( "http://jbjw.ngrok.io:3000" );
+var socket = io( "http://jbjw.com:3000" );
 socket.on( "connect", function () {
 	console.log( "connected" )
 } )
