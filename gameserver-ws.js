@@ -82,7 +82,7 @@ function updatePhysics() {
 	}
 }
 
-setInterval( updateNetwork, 10 )
+setInterval( updateNetwork, 100 )
 function updateNetwork() {
 	io.sockets.emit( "update", entities )
 }
