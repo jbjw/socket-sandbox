@@ -36,22 +36,23 @@ function Player( args ) {
 	this.ip = args.ip
 	this.body = new Body()
 	entities.push( this.body )
+	this.speed = 0.1
 }
 
 Player.prototype.applyAction = function ( action, start ) {
 	var velAdd = new THREE.Vector3( 0, 0, 0 )
 	switch ( action ) {
 		case "up":
-			velAdd.y = 1
+			velAdd.y = this.speed
 			break
 		case "down":
-			velAdd.y = -1
+			velAdd.y = -this.speed
 			break
 		case "left":
-			velAdd.x = -1
+			velAdd.x = -this.speed
 			break
 		case "right":
-			velAdd.x = 1
+			velAdd.x = this.speed
 			break
 	}
 	console.log( this.body )
@@ -81,7 +82,7 @@ function updatePhysics() {
 	}
 }
 
-setInterval( updateNetwork, 100 )
+setInterval( updateNetwork, 10 )
 function updateNetwork() {
 	io.sockets.emit( "update", entities )
 }
