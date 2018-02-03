@@ -119,6 +119,58 @@ const controls = new THREE.OrbitControls( camera )
 
 const entities = []
 
+
+function Player( args ) {
+	this.username = args.username
+	this.ip = args.ip
+	this.body = new Body()
+	entities.push( this.body )
+	this.speed = 0.1
+}
+
+Player.prototype.applyAction = function ( action, start ) {
+	var velAdd = new THREE.Vector3( 0, 0, 0 )
+	switch ( action ) {
+		case "up":
+			velAdd.y = this.speed
+			break
+		case "down":
+			velAdd.y = -this.speed
+			break
+		case "left":
+			velAdd.x = -this.speed
+			break
+		case "right":
+			velAdd.x = this.speed
+			break
+	}
+	console.log( this.body )
+	if ( start ) {
+		this.body.velocity.copy( velAdd )
+	} else if ( !start ) {
+		this.body.velocity.copy( new THREE.Vector3( 0, 0, 0 ) )
+	}
+}
+
+let idCounter = 0
+function Body() {
+	this.id = idCounter++
+	this.position = new THREE.Vector3( 0, 0, 0 )
+	this.velocity = new THREE.Vector3( 0, 0, 0 )
+}
+
+Body.prototype.updatePhysics = function () {
+	this.position.add( this.velocity )
+	// console.log( this.position )
+}
+
+setInterval( updatePhysics, 10 )
+function updatePhysics() {
+	for ( let entity of entities ) {
+		entity.updatePhysics()
+	}
+}
+
 function Body() {
 	this.mesh = new THREE.Mesh(
 		// new THREE.SphereGeometry( 0.5, 32, 32 ),
