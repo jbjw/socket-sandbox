@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "socket.io": "^2.0.4",
-    "three": "^0.89.0"
+    "three": "^0.89.0",
+    "ws": "^4.0.0"
   }
 }
